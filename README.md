@@ -1,4 +1,4 @@
-# stringwidth
+# stringwidth [![Go Reference](https://pkg.go.dev/badge/github.com/shibukawa/stringwidth.svg)](https://pkg.go.dev/github.com/shibukawa/stringwidth)
 
 Go library that calculate display width of string.
 
