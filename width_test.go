@@ -16,7 +16,7 @@ func TestCalc(t *testing.T) {
 			name: "simple words",
 			args: args{
 				src: "hello",
-				opt: []Opt{{IsAmbiguousWide: false}},
+				opt: []Opt{},
 			},
 			want: 5,
 		},
@@ -24,9 +24,17 @@ func TestCalc(t *testing.T) {
 			name: "East Asian Wide",
 			args: args{
 				src: "こんにちわ",
-				opt: []Opt{{IsAmbiguousWide: false}},
+				opt: []Opt{},
 			},
 			want: 10,
+		},
+		{
+			name: "East Asian Ambiguous (option default)",
+			args: args{
+				src: "¼½¾",
+				opt: []Opt{},
+			},
+			want: 3,
 		},
 		{
 			name: "East Asian Ambiguous (option false)",
@@ -48,7 +56,7 @@ func TestCalc(t *testing.T) {
 			name: "Standard Emoji",
 			args: args{
 				src: "🐙",
-				opt: []Opt{{IsAmbiguousWide: false}},
+				opt: []Opt{},
 			},
 			want: 2,
 		},
@@ -56,9 +64,17 @@ func TestCalc(t *testing.T) {
 			name: "Emoji Sequence",
 			args: args{
 				src: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", // 0x1F3F4 0xE0067 0xE0062 0xE0065 0xE006E 0xE0067 0xE007F
-				opt: []Opt{{IsAmbiguousWide: true}},
+				opt: []Opt{},
 			},
 			want: 2,
+		},
+		{
+			name: "ANSI escape code",
+			args: args{
+				src: "\x1b[38;5;140m foo\x1b[0m bar",
+				opt: []Opt{},
+			},
+			want: 8,
 		},
 	}
 	for _, tt := range tests {

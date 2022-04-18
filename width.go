@@ -1,6 +1,7 @@
 package stringwidth
 
 import (
+	"github.com/acarl005/stripansi"
 	"golang.org/x/text/width"
 )
 
@@ -17,6 +18,7 @@ func Calc(src string, opt ...Opt) int {
 	if len(opt) > 0 && opt[0].IsAmbiguousWide {
 		ambiguousWidth = 2
 	}
+	src = stripansi.Strip(src)
 	runes := []rune(src)
 	size := 0
 	// 0, 2

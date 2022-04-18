@@ -35,3 +35,10 @@ w := width.Calc("¼", width.Opt{
 ## License
 
 Apache2
+
+## Credits
+
+* golang.org/x/text
+  * The Go Authors: BSD-3-Clause 
+* github.com/acarl005/stripansi
+  * acarl005: MIT
