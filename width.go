@@ -6,13 +6,13 @@ import (
 )
 
 //go:generate go run cmd/generator/main.go -pkg stringwidth -o emoji_sequence.go
+//go:generate go fmt
 
 type Opt struct {
 	IsAmbiguousWide bool
 }
 
 // Calc calculates string display width on terminal.
-//
 func Calc(src string, opt ...Opt) int {
 	ambiguousWidth := 1
 	if len(opt) > 0 && opt[0].IsAmbiguousWide {
@@ -21,7 +21,6 @@ func Calc(src string, opt ...Opt) int {
 	src = stripansi.Strip(src)
 	runes := []rune(src)
 	size := 0
-	// 0, 2
 	for i := 0; i < len(runes); i++ {
 		match := false
 		if sequences, ok := emojiSequences[runes[i]]; ok {
